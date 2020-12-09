@@ -54,7 +54,7 @@ ROOT_URLCONF = 'product_hunt.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,11 +72,15 @@ WSGI_APPLICATION = 'product_hunt.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+# TODO: make sure to change before pushing to production!!!!
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'producthuntdb',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres@1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
