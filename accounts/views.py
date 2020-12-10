@@ -4,12 +4,12 @@ from django.http import HttpResponse
 # Create your views here.
 def logout(request):
     # TODO: Implement
-    return HttpResponse("logout!")
+    return HttpResponse('logout!')
 
 def login(request):
     # TODO: Implement
-    return HttpResponse("login")
+    return render(request, 'accounts/login.html')
 
 def signup(request):
     # TODO: Implement
-    return HttpResponse("signup")
+    return render(request, 'accounts/signup.html')
