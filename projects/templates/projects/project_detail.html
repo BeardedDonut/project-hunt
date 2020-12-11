@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+
+  <div class="row">
+    <div class="col-2">
+      <img src="{{ project.icon.url }}" class="img-fluid">
+    </div>
+    <div class="col-10">
+      <a href="{{ project.url }}"><h1>{{ project.title }}</h1></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <img src="{{ project.image.url }}" class="img-fluid">
+    </div>
+    <div class="col-4">
+      <a href="javascript:{document.getElementById('upvote').submit()}"><button class="btn-primary btn-lg btn-block"><span class="oi oi-caret-top"></span> Upvote {{ project.total_votes }}</button></a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-4">
+      <h4>Owner is: {{ project.owner.username }}</h4>
+    </div>
+    <div class="col-4 text-right">
+      <h4>{{ project.print_pretty_date_created }}</h4>
+    </div>
+  </div>
+  <br/>
+
+  <div class="row">
+    <div class="col-8">
+      <h4>Project Description:</h4>
+      <p>{{ project.project_desc }}</p>
+    </div>
+  </div>
+
+  <form id="upvote" action="{% url 'upvote_project' project.id %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden">
+  </form>
+
+</div>
+
+{% endblock %}

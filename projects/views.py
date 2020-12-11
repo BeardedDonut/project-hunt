@@ -1,10 +1,25 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Project
 from django.utils import timezone
 
 def homepage(request):
     return render(request, 'projects/home.html')
+
+
+def get_project(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+    return render(request, 'projects/project_detail.html', {'project': project})
+
+@login_required
+def upvote_project(request, project_id):
+    if request.method == 'POST':
+        project = get_object_or_404(Project, pk=project_id)
+        project.total_votes += 1
+        project.save()
+        return redirect('/projects/' + str(project_id))
+
+
 
 @login_required
 def create_project(request):
@@ -31,7 +46,7 @@ def create_project(request):
                 project.url = 'http://' + request.POST['url']
 
             project.save()
-            return redirect('home') #TODO: redirect to a page to where project is shown
+            return redirect('/projects/' + str(project.id))
 
         else:
             return render(request, 'projects/create.html', {'error': 'All fields are required'})
