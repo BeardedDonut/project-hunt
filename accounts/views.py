@@ -4,14 +4,31 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 
 # Create your views here.
+
+# Logout -----------------------
 def logout(request):
     # TODO: Implement
     return HttpResponse('logout!')
 
-def login(request):
-    # TODO: Implement
-    return render(request, 'accounts/login.html')
 
+# Login ------------------------
+def login(request):
+    if request.method == 'POST':
+        user = auth.authenticate(username=request.POST['username']
+        , password=request.POST['password'])
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'accounts/login.html'
+            , {'error': 'Username or Password is incorrect!'})
+
+    elif request.method == 'GET':
+        return render(request, 'accounts/login.html')
+
+
+# Signup -----------------------
 def signup(request):
     if request.method == 'POST':
         # check if the `password` and `confirm_password` match
