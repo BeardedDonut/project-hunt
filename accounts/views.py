@@ -8,7 +8,9 @@ from django.contrib import auth
 # Logout -----------------------
 def logout(request):
     # TODO: Implement
-    return HttpResponse('logout!')
+    if request.method == 'POST':
+        auth.logout(request)
+        return redirect('home')
 
 
 # Login ------------------------
@@ -47,8 +49,6 @@ def signup(request):
         else:
             return render(request, 'accounts/signup.html'
             , {'error': 'Passwords do not match.'})
-
-
 
     elif request.method == 'GET':
         return render(request, 'accounts/signup.html')
