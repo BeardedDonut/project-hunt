@@ -4,7 +4,8 @@ from .models import Project
 from django.utils import timezone
 
 def homepage(request):
-    return render(request, 'projects/home.html')
+    projects = Project.objects
+    return render(request, 'projects/home.html', {'projects': projects})
 
 
 def get_project(request, project_id):
