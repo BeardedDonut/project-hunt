@@ -2,6 +2,37 @@
 
 {% block content %}
 
-Hi Welcome Home!
+<div class="album py-5 bg-light">
+      <div class="container">
+
+        <div class="row">
+          {% for project in projects.all %}
+
+          <div class="col-md-6">
+            <div class="card mb-6 shadow-sm">
+              <div class="text-center">
+                <a href="{% url 'get_project' project.id %}"><h4>{{project.title}}</h4></a>
+              </div>
+
+              <img class="card-img-top" src="{{ project.image.url }}" />
+
+              <div class="card-body">
+                <p class="card-text">{{ project.project_summary }}</p>
+              </div>
+              <div class="text-center p-3 mb-2 bg-dark text-white">
+              Upvotes: {{project.total_votes}}
+              </div>
+
+
+
+            </div>
+
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
 
 {% endblock %}
