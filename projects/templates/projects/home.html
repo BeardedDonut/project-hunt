@@ -14,7 +14,7 @@
                 <a href="{% url 'get_project' project.id %}"><h4>{{project.title}}</h4></a>
               </div>
 
-              <img class="card-img-top" src="{{ project.image.url }}" />
+              <img class="card-img-top" height="300px" width="200px" src="{{ project.image.url }}" />
 
               <div class="card-body">
                 <p class="card-text">{{ project.project_summary }}</p>
